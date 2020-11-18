@@ -1,0 +1,43 @@
+{
+  "name": "MakeSong",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "MohitSojitra",
+  "license": "MIT",
+  "scripts": {
+    "build-production": "webpack --config webpack.production.js",
+    "build-develop": "webpack --config webpack.development.js",
+    "build-develop-nowatch": "webpack --config webpack.development.nowatch.js",
+    "start": "nodemon --require dotenv/config dist/server",
+    "start-prod": "nodemon --require dotenv/config prod-dist/server",
+    "pm2-start-prod": "NODE_ENV=production pm2 start pm2.config.js"
+  },
+  "dependencies": {
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/mongoose": "^5.10.0",
+    "apollo-server": "^2.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql": "^15.4.0",
+    "graphql-relay": "^0.6.0",
+    "graphql-yoga": "^1.18.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.13",
+    "prettier": "^2.1.2",
+    "pretty-quick": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.5.0",
+    "@types/graphql-relay": "^0.6.0",
+    "@types/webpack-env": "^1.15.3",
+    "clean-webpack-plugin": "^3.0.0",
+    "husky": "^4.3.0",
+    "nodemon": "^2.0.6",
+    "ts-loader": "^8.0.11",
+    "typescript": "^4.0.5",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-merge": "^5.3.0",
+    "webpack-node-externals": "^2.5.2"
+  }
+}
