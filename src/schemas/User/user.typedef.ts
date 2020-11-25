@@ -5,7 +5,7 @@ export interface UserModel extends mongoose.Document {
   email: string;
   password: string;
   name: string;
-  playLists: [mongoose.Types.ObjectId];
-  likePlaylists: [mongoose.Types.ObjectId];
-  addSavePlayLists: [mongoose.Types.ObjectId];
+  events: [mongoose.Types.ObjectId];
+  isOrganizer: boolean;
+  organizeEvents: [mongoose.Types.ObjectId];
 }

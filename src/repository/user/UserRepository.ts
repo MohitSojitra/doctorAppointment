@@ -37,6 +37,16 @@ class UserRepository {
     }
   }
 
+  public async loginUser(email: string, password: string) {
+    const user = await User.findOne({ email, password });
+    if (!!user) {
+      const token = await JWTRepository.getInstance().generateToken(user._id);
+      return { token };
+    } else {
+      throw new Error("InValid Credential !!");
+    }
+  }
+
   public static getInstance() {
     if (!UserRepository.instance) {
       UserRepository.instance = new UserRepository();

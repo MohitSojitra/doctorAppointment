@@ -1,6 +1,7 @@
 import { GraphQLObjectType, GraphQLString } from "graphql";
 import { connectionDefinitions, globalIdField } from "graphql-relay";
 import { Context } from "../../context";
+import { GraphQLEventQuery } from "../events/event.query";
 
 const GraphQLUser = new GraphQLObjectType({
   name: "user",
@@ -8,7 +9,7 @@ const GraphQLUser = new GraphQLObjectType({
     id: globalIdField("User"),
     userId: {
       type: GraphQLString,
-      resolve: async (parent, args, ctx: Context, info) => {
+      resolve: async (parent: any, args: any, ctx: Context, info: any) => {
         const { userId } = await ctx.getUserId();
         return userId;
       },
@@ -19,6 +20,7 @@ const GraphQLUser = new GraphQLObjectType({
     name: {
       type: GraphQLString,
     },
+    ...GraphQLEventQuery,
   }),
 });
 

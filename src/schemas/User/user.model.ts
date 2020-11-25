@@ -6,9 +6,9 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     name: { type: String },
-    playLists: [{ type: mongoose.Types.ObjectId, ref: "playlist" }],
-    likePlaylists: [{ type: mongoose.Types.ObjectId, ref: "playlist" }],
-    addSavePlayLists: [{ type: mongoose.Types.ObjectId, ref: "playlist" }],
+    events: [{ type: mongoose.Types.ObjectId, ref: "event" }],
+    isOrganizer: { type: Boolean, default: false },
+    organizeEvents: [{ type: mongoose.Types.ObjectId, ref: "event" }],
   },
   {
     timestamps: true,

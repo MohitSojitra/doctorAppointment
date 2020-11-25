@@ -21,6 +21,7 @@
     "graphql": "^15.4.0",
     "graphql-relay": "^0.6.0",
     "graphql-yoga": "^1.18.3",
+    "js-base64": "^3.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.13",
     "prettier": "^2.1.2",

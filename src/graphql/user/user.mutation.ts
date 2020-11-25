@@ -24,8 +24,26 @@ const GraphQLRegisterUserMutations = mutationWithClientMutationId({
   },
 });
 
+/* Login User  */
+const GraphQLLoginUserMutations = mutationWithClientMutationId({
+  name: "login",
+  inputFields: {
+    email: { type: GraphQLNonNull(GraphQLString) },
+    password: { type: GraphQLNonNull(GraphQLString) },
+  },
+  outputFields: {
+    success: { type: GraphQLBoolean },
+    token: { type: GraphQLString },
+  },
+  mutateAndGetPayload: async ({ email, password, name }, ctx: Context) => {
+    const { token } = await ctx._userRepository.loginUser(email, password);
+    return { token, success: true };
+  },
+});
+
 const GraphQLUserMutation = {
   register: GraphQLRegisterUserMutations,
+  login: GraphQLLoginUserMutations,
 };
 
 export { GraphQLUserMutation };

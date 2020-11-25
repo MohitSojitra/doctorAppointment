@@ -4,10 +4,10 @@ import {
   GraphQLSchema,
   GraphQLString,
 } from "graphql";
-import { mutationWithClientMutationId } from "graphql-relay";
+
 import { GraphQLUSerQuery } from "./user";
 import { GraphQLUserMutation } from "./user/index";
-
+import { GraphQLEventMutation } from "./events/event.mutattion";
 const RootQuery = new GraphQLObjectType({
   name: "Root",
   fields: {
@@ -19,6 +19,8 @@ const RootMutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
     ...GraphQLUserMutation,
+    ...GraphQLEventMutation,
+    // ...GraphQLOrganizerMutation,
   },
 });
 
