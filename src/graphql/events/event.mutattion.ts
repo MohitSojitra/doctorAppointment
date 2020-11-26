@@ -1,6 +1,7 @@
 import {
   GraphQLBoolean,
   GraphQLID,
+  GraphQLInt,
   GraphQLList,
   GraphQLNonNull,
   GraphQLString,
@@ -13,6 +14,12 @@ const GraphQLRegisterEventrMutations = mutationWithClientMutationId({
   name: "registerEvent",
   inputFields: {
     name: { type: GraphQLNonNull(GraphQLString) },
+    category: { type: GraphQLNonNull(GraphQLString) },
+    gender: { type: GraphQLString },
+    description: { type: GraphQLString },
+    address: { type: GraphQLString },
+    capicity: { type: GraphQLInt },
+
     date: { type: GraphQLNonNull(GraphQLString) },
     tags: { type: GraphQLList(GraphQLString) },
     mapLat: { type: GraphQLString },
@@ -22,16 +29,32 @@ const GraphQLRegisterEventrMutations = mutationWithClientMutationId({
     success: { type: GraphQLBoolean },
   },
   mutateAndGetPayload: async (
-    { tags, date, name, mapLag, mapLat },
+    {
+      name,
+      category,
+      gender,
+      description,
+      address,
+      capicity,
+      date,
+      tags,
+      mapLat,
+      mapLag,
+    },
     ctx: Context,
   ) => {
     const { userId } = await ctx.getUserId();
     const success = await ctx._eventRepository.registerEvent(
-      tags,
-      date,
       name,
-      mapLag,
+      category,
+      gender,
+      description,
+      address,
+      capicity,
+      date,
+      tags,
       mapLat,
+      mapLag,
       userId,
     );
     return { success };
@@ -44,6 +67,11 @@ const GraphQLUpdateEventrMutations = mutationWithClientMutationId({
   inputFields: {
     eventId: { type: GraphQLNonNull(GraphQLString) },
     name: { type: GraphQLString },
+    category: { type: GraphQLString },
+    gender: { type: GraphQLString },
+    description: { type: GraphQLString },
+    address: { type: GraphQLString },
+    capicity: { type: GraphQLInt },
     date: { type: GraphQLString },
     tags: { type: GraphQLList(GraphQLString) },
     mapLat: { type: GraphQLString },
@@ -53,16 +81,33 @@ const GraphQLUpdateEventrMutations = mutationWithClientMutationId({
     success: { type: GraphQLBoolean },
   },
   mutateAndGetPayload: async (
-    { tags, date, name, mapLag, mapLat, eventId },
+    {
+      name,
+      category,
+      gender,
+      description,
+      address,
+      capicity,
+      date,
+      tags,
+      mapLat,
+      mapLag,
+      eventId,
+    },
     ctx: Context,
   ) => {
     const success = await ctx._eventRepository.updateEvent(
       eventId,
-      tags,
-      date,
       name,
-      mapLag,
+      category,
+      gender,
+      description,
+      address,
+      capicity,
+      date,
+      tags,
       mapLat,
+      mapLag,
     );
     return { success };
   },

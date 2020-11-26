@@ -13,15 +13,32 @@ class EventRepository {
    * @param mapLat
    */
   public async registerEvent(
+    name: string,
+    category: string,
+    gender: string,
+    description: string,
+    address: string,
+    capicity: Int16Array,
+    date: string,
     tags: any,
-    date: any,
-    name: any,
-    mapLag: any,
-    mapLat: any,
+    mapLat: string,
+    mapLag: string,
     userId: any,
   ) {
     // console.log({ tags, date, name, mapLag, mapLat });
-    const newEvent = new Event({ tags, date, name, mapLag, mapLat, userId });
+    const newEvent = new Event({
+      name,
+      category,
+      gender,
+      description,
+      address,
+      capicity,
+      date,
+      tags,
+      mapLat,
+      mapLag,
+      userId,
+    });
     const saveEvent = await newEvent.save();
     // console.log({ saveEvent });
     if (!!!saveEvent) {
@@ -38,7 +55,6 @@ class EventRepository {
     } catch (e) {
       throw new Error("dont save in user !");
     }
-
     return true;
   }
 
@@ -73,11 +89,16 @@ class EventRepository {
    */
   public async updateEvent(
     eventId: any,
+    name: string,
+    category: string,
+    gender: string,
+    description: string,
+    address: string,
+    capicity: Int16Array,
+    date: string,
     tags: any,
-    date: any,
-    name: any,
-    mapLag: any,
-    mapLat: any,
+    mapLat: string,
+    mapLag: string,
   ) {
     let updatedItem = {};
     if (!!tags) {
@@ -94,6 +115,21 @@ class EventRepository {
     }
     if (!!mapLat) {
       updatedItem = { ...updatedItem, mapLat };
+    }
+    if (!!category) {
+      updatedItem = { ...updatedItem, category };
+    }
+    if (!!gender) {
+      updatedItem = { ...updatedItem, gender };
+    }
+    if (!!description) {
+      updatedItem = { ...updatedItem, description };
+    }
+    if (!!address) {
+      updatedItem = { ...updatedItem, address };
+    }
+    if (!!capicity) {
+      updatedItem = { ...updatedItem, capicity };
     }
 
     try {
@@ -116,6 +152,14 @@ class EventRepository {
       throw new Error(e);
     }
     return true;
+  }
+
+  public async getEventById(eventId: string) {
+    const event = await Event.findById(eventId);
+    if (!!!event) {
+      throw new Error("event not found !!!");
+    }
+    return event;
   }
 
   /**
