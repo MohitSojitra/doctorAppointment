@@ -1,3 +1,7 @@
+import {
+  argsToWhereCond,
+  cursorToobjectId,
+} from "../../common/common.graphQlPagination";
 import { Event } from "../../schemas/Event";
 import { User } from "../../schemas/User";
 
@@ -62,17 +66,21 @@ class EventRepository {
    * getAll events of perticular user
    * @param userId
    */
-  public async getAllEventByUserId(userId: any) {
+  public async getAllEventByUserId(userId: any, args: any) {
+    const { where, limit, orderBy } = argsToWhereCond(args);
+
     const user = await User.findById(userId);
     if (!!!user) {
       throw new Error("user not found!");
     }
-    console.log({ user });
+    // console.log({ user });
 
-    const events = await Promise.all(
-      user.events.map(async (e) => await Event.findById(e)),
-    );
-
+    const events = await Event.find({
+      ...where,
+      userId: user._id.toString(),
+    })
+      .limit(limit)
+      .sort(orderBy);
     // console.log(events);
 
     return events;
