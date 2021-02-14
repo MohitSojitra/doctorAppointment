@@ -1,3 +1,5 @@
+// import { GraphQLUpload } from "apollo-server";
+// import { GraphQLUpload } from "apollo-server";
 import {
   GraphQLBoolean,
   GraphQLID,
@@ -24,6 +26,7 @@ const GraphQLRegisterEventrMutations = mutationWithClientMutationId({
     tags: { type: GraphQLList(GraphQLString) },
     mapLat: { type: GraphQLString },
     mapLag: { type: GraphQLString },
+    // photos: { type: GraphQLUpload! },
   },
   outputFields: {
     success: { type: GraphQLBoolean },

@@ -13,4 +13,5 @@ export interface EventModel extends mongoose.Document {
   mapLag: string;
   mapLat: string;
   userId: string;
+  eventPic: string;
 }

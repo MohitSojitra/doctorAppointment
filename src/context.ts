@@ -10,6 +10,7 @@ interface Icontext {
   _eventRepository: EventRepository;
 
   getUserId(): any;
+  storeEventImage(): void;
 }
 
 class Context implements Icontext {
@@ -36,6 +37,11 @@ class Context implements Icontext {
       // console.log({ error: e });
       throw new Error(`${e.message}` || "Invalid Token");
     }
+  }
+
+  public async storeEventImage() {
+    const formData = this._request.body;
+    console.log(formData);
   }
 }
 

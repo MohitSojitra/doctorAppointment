@@ -1,11 +1,13 @@
+import { env } from "./common/Env";
+
 const defaultPort = 3000;
 
 export const environment = {
   port: process.env.PORT || defaultPort,
   mongodb: {
-    devUrl: "mongodb://localhost:27017/Plumpy",
+    devUrl: `${env.mongoUrl}`,
   },
   jwt: {
-    secreat: "mohit-sojitra-pravinbhai-1234-5678-0987",
+    secreat: env.jwtSecreat,
   },
 };

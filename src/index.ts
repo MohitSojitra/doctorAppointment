@@ -5,7 +5,7 @@ if (module.hot) {
 }
 
 // import { GraphQLServer } from "graphql-yoga";
-import { ApolloServer } from "apollo-server";
+import { ApolloServer } from "apollo-server-express";
 
 import { schema } from "./graphql/schema";
 import mongoose from "mongoose";
@@ -14,6 +14,9 @@ import express from "express";
 import path from "path";
 import { environment } from "./environment";
 
+import imageRouter from "./routes/imageRouter";
+import { env } from "./common/Env";
+
 const context = async (ctx: any) => new Context(ctx.req, ctx.res);
 
 // const server = new GraphQLServer({
@@ -21,7 +24,7 @@ const context = async (ctx: any) => new Context(ctx.req, ctx.res);
 //   context,
 // });
 // const app = server.express;
-// app.use("/", express.static(path.join("public")));
+// app.use("/event", imageRouter);
 
 // const option = {
 //   port: 3000,
@@ -48,9 +51,22 @@ const apolloserver = new ApolloServer({
   introspection: true,
 });
 
-apolloserver.listen({ port: 3000, path: "graphql" }).then(({ url }) => {
-  console.log(`🚀 Server is running on ${url} 🔥 🔥 🔥`);
+const app = express();
+apolloserver.applyMiddleware({ app });
+// app.use(express.json());
+// app.use("/", express.static(path.join("public")));
+app.use("/event", imageRouter);
+app.get("/eventPoster", (req, res, next) => {
+  res.end("success");
 });
+
+// app.listen({ port: 3000, path: "graphql" }).then(({ url }) => {
+//   console.log(`🚀 Server is running on ${url} 🔥 🔥 🔥`);
+// });
+
+app.listen({ port: 3000, path: "graphql" }, () =>
+  console.log(`🚀 Server ready at ${env.siteUrl}${apolloserver.graphqlPath}`),
+);
 
 mongoose
   .connect(environment.mongodb.devUrl)

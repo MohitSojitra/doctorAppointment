@@ -16,6 +16,7 @@ const eventSchema = new mongoose.Schema(
       type: String,
     },
     userId: { type: mongoose.Types.ObjectId },
+    eventPic: { type: String },
   },
   {
     timestamps: true,
