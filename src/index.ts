@@ -64,7 +64,7 @@ app.get("/eventPoster", (req, res, next) => {
 //   console.log(`🚀 Server is running on ${url} 🔥 🔥 🔥`);
 // });
 
-app.listen({ port: 3000, path: "graphql" }, () =>
+app.listen({ port: 3003, path: "graphql" }, () =>
   console.log(`🚀 Server ready at ${env.siteUrl}${apolloserver.graphqlPath}`),
 );
 
