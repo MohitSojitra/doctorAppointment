@@ -69,7 +69,7 @@ app.listen({ port: 3000, path: "graphql" }, () =>
 );
 
 mongoose
-  .connect(environment.mongodb.devUrl)
+  .connect(env.mongoUrl, { useNewUrlParser: true })
   .then(() => {
     console.log("mongoDb successfully connected");
   })
