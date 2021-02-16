@@ -37,6 +37,7 @@ imageRouter
     res.end("success");
   })
   .post(upload.single("eventPoster"), async (req, res, next) => {
+    console.log("post run");
     try {
       // console.log({ in: req.body.eventid });
       const event = await Event.findByIdAndUpdate(

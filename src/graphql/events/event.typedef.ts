@@ -1,4 +1,5 @@
 import {
+  graphql,
   GraphQLInt,
   GraphQLList,
   GraphQLObjectType,
@@ -34,6 +35,9 @@ const GraphQLEvent = new GraphQLObjectType({
     },
     capicity: {
       type: GraphQLInt,
+    },
+    eventPic: {
+      type: GraphQLString,
     },
 
     tags: {

@@ -59,7 +59,7 @@ class EventRepository {
     } catch (e) {
       throw new Error("dont save in user !");
     }
-    return true;
+    return { success: true, eventId: saveEvent._id };
   }
 
   /**
@@ -81,6 +81,22 @@ class EventRepository {
     })
       .limit(limit)
       .sort(orderBy);
+    // console.log(events);
+
+    return events;
+  }
+  /**
+   * getAll events of perticular user
+   * @param userId
+   */
+  public async getExploreQuery(args: any) {
+    const { where, limit, orderBy } = argsToWhereCond(args);
+
+    const events = await Event.find({
+      ...where,
+    })
+      .limit(limit)
+      .sort([["updatedAt", -1]]);
     // console.log(events);
 
     return events;

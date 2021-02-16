@@ -31,6 +31,23 @@ const GraphQLEventQuery = {
       // return events;
     },
   },
+  exploreQuery: {
+    // type: GraphQLList(GraphQLEvent),
+    type: GraphQLEventConnection,
+    // type: GraphQLBoolean,
+    args: { ...connectionArgs },
+    resolve: async (parent: any, args: any, ctx: Context, info: any) => {
+      // console.log("is it run...");
+      // const { userId } = await ctx.getUserId();
+      // console.log({ userId });
+      const events = await ctx._eventRepository.getExploreQuery(args);
+      // console.log({ events });
+
+      return await mongooseConnectionFromArray(Event, events, args);
+      // return events;
+    },
+  },
+
   getEventById: {
     type: GraphQLEvent,
     args: {

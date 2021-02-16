@@ -29,6 +29,7 @@ const GraphQLRegisterEventrMutations = mutationWithClientMutationId({
     // photos: { type: GraphQLUpload! },
   },
   outputFields: {
+    eventId: { type: GraphQLID },
     success: { type: GraphQLBoolean },
   },
   mutateAndGetPayload: async (
@@ -47,7 +48,7 @@ const GraphQLRegisterEventrMutations = mutationWithClientMutationId({
     ctx: Context,
   ) => {
     const { userId } = await ctx.getUserId();
-    const success = await ctx._eventRepository.registerEvent(
+    const result = await ctx._eventRepository.registerEvent(
       name,
       category,
       gender,
@@ -60,7 +61,7 @@ const GraphQLRegisterEventrMutations = mutationWithClientMutationId({
       mapLag,
       userId,
     );
-    return { success };
+    return { ...result };
   },
 });
 

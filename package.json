@@ -6,7 +6,6 @@
   "license": "MIT",
   "scripts": {
     "build-production": "webpack --config webpack.production.js",
-    
     "build-develop": "webpack --config webpack.development.js",
     "build": "webpack --config webpack.development.js",
     "build-develop-nowatch": "webpack --config webpack.development.nowatch.js",
@@ -20,6 +19,7 @@
     "@types/mongoose": "^5.10.0",
     "apollo-server-express": "^2.19.1",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^15.4.0",

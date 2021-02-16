@@ -16,6 +16,7 @@ import { environment } from "./environment";
 
 import imageRouter from "./routes/imageRouter";
 import { env } from "./common/Env";
+import cors from "cors";
 
 const context = async (ctx: any) => new Context(ctx.req, ctx.res);
 
@@ -52,11 +53,28 @@ const apolloserver = new ApolloServer({
 });
 
 const app = express();
+app.use(cors());
+
+// serve file
+
+app.use(express.static(__dirname + "/public"));
+
+// console.log({ path: __dirname + "/public/" });
+
+// end serve file
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 apolloserver.applyMiddleware({ app });
-// app.use(express.json());
-// app.use("/", express.static(path.join("public")));
+
 app.use("/event", imageRouter);
 app.get("/eventPoster", (req, res, next) => {
+  res.end("success");
+});
+
+app.get("/", (req, res, next) => {
   res.end("success");
 });
 
@@ -64,8 +82,10 @@ app.get("/eventPoster", (req, res, next) => {
 //   console.log(`🚀 Server is running on ${url} 🔥 🔥 🔥`);
 // });
 
-app.listen({ port: 3003, path: "graphql" }, () =>
-  console.log(`🚀 Server ready at ${env.siteUrl}${apolloserver.graphqlPath}`),
+app.listen({ port: env.port, path: "graphql" }, () =>
+  console.log(
+    `🚀 Server ready at ${env.siteUrl}${apolloserver.graphqlPath} 🔥 🔥 🔥`,
+  ),
 );
 
 mongoose
