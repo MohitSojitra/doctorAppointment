@@ -8,7 +8,7 @@ imageRouter.use(bodyParser.json());
 
 const Storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    return cb(null, "dist/public/images");
+    return cb(null, "public/images");
   },
   filename: (req, file, cb) => {
     // console.log({ param: req.params, body: req.body });

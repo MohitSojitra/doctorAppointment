@@ -78,6 +78,10 @@ app.get("/", (req, res, next) => {
   res.end("success");
 });
 
+app.get("/images/:imageName", (req, res, next) => {
+  res.sendFile(__dirname + `/images/${req.params.imageName}`);
+});
+
 // app.listen({ port: 3000, path: "graphql" }).then(({ url }) => {
 //   console.log(`🚀 Server is running on ${url} 🔥 🔥 🔥`);
 // });

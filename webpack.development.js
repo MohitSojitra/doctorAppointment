@@ -3,6 +3,7 @@ const { merge } = require("webpack-merge");
 const nodeExternals = require("webpack-node-externals");
 const path = require("path");
 const webpack = require("webpack");
+var CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const common = require("./webpack.common.js");
 
@@ -15,7 +16,13 @@ module.exports = merge(common, {
     }),
   ],
   mode: "development",
-  plugins: [new CleanWebpackPlugin(), new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [{ from: "public/images", to: "images" }],
+    }),
+  ],
   watch: true,
   // watch: false ,  true in developement
 });
