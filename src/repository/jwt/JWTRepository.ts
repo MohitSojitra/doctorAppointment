@@ -1,5 +1,5 @@
 import * as jwt from "jsonwebtoken";
-import { environment } from "../../environment";
+import { env } from "../../common/Env";
 import { Request } from "express";
 
 class JWTRepository {
@@ -11,7 +11,7 @@ class JWTRepository {
    * @param userId
    */
   public generateToken(userId: any): string {
-    return `JWT ${jwt.sign({ payload: userId }, `${environment.jwt.secreat}`, {
+    return `JWT ${jwt.sign({ payload: userId }, `${env.jwtSecreat}`, {
       expiresIn: 60 * 60 * 60 * 2,
     })}`;
   }
@@ -36,7 +36,7 @@ class JWTRepository {
    * @param token verify jwt token
    */
   public verifyToken(token: string) {
-    return jwt.verify(token, `${environment.jwt.secreat}`);
+    return jwt.verify(token, `${env.jwtSecreat}`);
   }
 
   /**

@@ -1,5 +1,6 @@
 import { Request, response } from "express";
-import { EventRepository } from "./repository/event/EventRepository";
+import { DoctorRepository } from "./repository/doctor/doctor.repository";
+
 import { JWTRepository } from "./repository/jwt/JWTRepository";
 
 import { UserRepository } from "./repository/user/UserRepository";
@@ -7,7 +8,8 @@ import { UserRepository } from "./repository/user/UserRepository";
 interface Icontext {
   _jwt: JWTRepository;
   _userRepository: UserRepository;
-  _eventRepository: EventRepository;
+
+  _doctorRepository: DoctorRepository;
 
   getUserId(): any;
   storeEventImage(): void;
@@ -19,7 +21,8 @@ class Context implements Icontext {
 
   public _jwt: JWTRepository = JWTRepository.getInstance();
   public _userRepository: UserRepository = UserRepository.getInstance();
-  public _eventRepository: EventRepository = EventRepository.getInstance();
+
+  public _doctorRepository: DoctorRepository = DoctorRepository.getInstance();
 
   constructor(req: Request, res: Response) {
     this._request = req;

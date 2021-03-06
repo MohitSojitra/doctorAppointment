@@ -1,6 +1,7 @@
 import { GraphQLObjectType } from "graphql";
 import { Context } from "../../context";
 import { UserRepository } from "../../repository/user/UserRepository";
+import { GraphQLDoctorQuery } from "../doctor/doctor.query";
 import { GraphQLUser } from "./user.typedef";
 
 const GraphQLUSerQuery = {
@@ -14,6 +15,7 @@ const GraphQLUSerQuery = {
 
       return user;
     },
+    ...GraphQLDoctorQuery,
   },
 };
 

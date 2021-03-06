@@ -1,7 +1,8 @@
 import { GraphQLObjectType, GraphQLString } from "graphql";
 import { connectionDefinitions, globalIdField } from "graphql-relay";
 import { Context } from "../../context";
-import { GraphQLEventQuery } from "../events/event.query";
+import { GraphQLDoctorQuery } from "../doctor/doctor.query";
+// import { GraphQLEventQuery } from "../events/event.query";
 
 const GraphQLUser = new GraphQLObjectType({
   name: "user",
@@ -20,7 +21,8 @@ const GraphQLUser = new GraphQLObjectType({
     name: {
       type: GraphQLString,
     },
-    ...GraphQLEventQuery,
+    // ...GraphQLEventQuery,
+    ...GraphQLDoctorQuery,
   }),
 });
 

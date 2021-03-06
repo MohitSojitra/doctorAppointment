@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import multer from "multer";
 import { Event } from "../schemas/Event";
+import { Doctor } from "../schemas/Doctor/doctor.model";
 
 const imageRouter = express.Router();
 imageRouter.use(bodyParser.json());
@@ -29,20 +30,35 @@ const upload = multer({
 });
 
 imageRouter
-  .route("/eventposter/:eventId")
+  .route("/doctor/:doctorId")
   .get((req, res, next) => {
     console.log("in the get");
     res.statusCode = 200;
     res.setHeader("content-type", "text/html");
     res.end("success");
   })
-  .post(upload.single("eventPoster"), async (req, res, next) => {
+  .post(upload.single("doctorImage"), async (req, res, next) => {
     console.log("post run");
     try {
       // console.log({ in: req.body.eventid });
-      const event = await Event.findByIdAndUpdate(
-        req.params.eventId,
-        { $set: { eventPic: "images/" + req.file.originalname } },
+      const event = await Doctor.findByIdAndUpdate(
+        req.params.doctorId,
+        { $set: { imageUrl: "images/" + req.file.originalname } },
+        { new: true },
+      );
+      console.log({ event });
+      res.status(200).send({ status: "success" });
+    } catch (e) {
+      console.log(e);
+    }
+  })
+  .put(upload.single("doctorImage"), async (req, res, next) => {
+    console.log("post run");
+    try {
+      // console.log({ in: req.body.eventid });
+      const event = await Doctor.findByIdAndUpdate(
+        req.params.doctorId,
+        { $set: { imageUrl: "images/" + req.file.originalname } },
         { new: true },
       );
       console.log({ event });

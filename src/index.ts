@@ -12,36 +12,13 @@ import mongoose from "mongoose";
 import { Context } from "./context";
 import express from "express";
 import path from "path";
-import { environment } from "./environment";
 
 import imageRouter from "./routes/imageRouter";
+import apiRouter from "./routes/apiRoutes";
 import { env } from "./common/Env";
 import cors from "cors";
 
 const context = async (ctx: any) => new Context(ctx.req, ctx.res);
-
-// const server = new GraphQLServer({
-//   schema,
-//   context,
-// });
-// const app = server.express;
-// app.use("/event", imageRouter);
-
-// const option = {
-//   port: 3000,
-//   endpoint: "/graphql",
-//   subscription: "/subscription",
-//   playground: "/playground",
-//   cors: {
-//     origin: "*",
-//   },
-// };
-
-// server.start(option, ({ port }) =>
-//   console.log(
-//     `Server started, listening on port ${port} for incoming requests.`,
-//   ),
-// );
 
 const apolloserver = new ApolloServer({
   schema,
@@ -69,18 +46,8 @@ app.use((req, res, next) => {
 });
 apolloserver.applyMiddleware({ app });
 
+app.use("/", apiRouter);
 app.use("/event", imageRouter);
-app.get("/eventPoster", (req, res, next) => {
-  res.end("success");
-});
-
-app.get("/", (req, res, next) => {
-  res.end("success");
-});
-
-app.get("/images/:imageName", (req, res, next) => {
-  res.sendFile(__dirname + `/images/${req.params.imageName}`);
-});
 
 // app.listen({ port: 3000, path: "graphql" }).then(({ url }) => {
 //   console.log(`🚀 Server is running on ${url} 🔥 🔥 🔥`);
