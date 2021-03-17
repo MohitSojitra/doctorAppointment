@@ -8,7 +8,7 @@ const developMent = {
 const production = {
   siteUrl: "http://localhost:3000",
   mongoUrl:
-    "mongodb+srv://Mohit:Sojitra@cluster0.luxws.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "YOUR_PRODUCTION_URL",
   jwtSecreat: "mohit-sojitra-pravinbhai-1234-5678-0987",
   port: 3000,
 };
